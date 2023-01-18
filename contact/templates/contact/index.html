@@ -2,9 +2,22 @@
 
 {% block content %}
   <h1 class="text-center">Contact name list</h1>
-  <ul>
-    {% for contact in contacts %}
-      <li>{{ contact.name }}</li>
-    {% endfor %}
-  </ul>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contact in contacts %}
+      <tr>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phone_number }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
 {% endblock %}
