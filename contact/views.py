@@ -42,3 +42,10 @@ def edit(request, contact_id):
       'form': form,
     }
     return render(request, 'contact/edit.html', ctx)
+
+def delete(request, contact_id):
+  contact = models.Contact.objects.get(id=contact_id)
+  contact.delete()
+  
+  return redirect('contact:index')
+    
