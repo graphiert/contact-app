@@ -14,7 +14,7 @@
     <tbody>
       {% for contact in contacts %}
       <tr>
-        <td>{{ contact.name }}</td>
+        <td><a href="{% url 'contact:edit' contact.id %}">{{ contact.name }}</a></td>
         <td>{{ contact.phone_number }}</td>
       </tr>
       {% endfor %}

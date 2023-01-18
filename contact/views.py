@@ -26,3 +26,19 @@ def add(request):
     }
     return render(request, 'contact/add.html', ctx)
       
+def edit(request, contact_id):
+  if request.POST:
+    contact = models.Contact.objects.get(id=contact_id)
+    form_data = forms.ContactForm(request.POST, instance=contact)
+    if form_data.is_valid():
+      form_data.save()
+      return redirect('contact:index')
+  else:
+    contact = models.Contact.objects.get(id=contact_id)
+    form = forms.ContactForm(instance=contact)
+    ctx = {
+      'pagetitle': 'Add Contact',
+      'contact': contact,
+      'form': form,
+    }
+    return render(request, 'contact/edit.html', ctx)

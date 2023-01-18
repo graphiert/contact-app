@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  <h1 class="text-center">Edit contact for {{ contact.name }}</h1>
+  
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button ="submit" class="btn btn-primary">Submit</button>
+    <a href="{% url 'contact:index' %}">Back</a>
+  </form>
+  
+{% endblock %}
