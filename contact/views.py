@@ -23,23 +23,27 @@ def index(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def add(request):
+  error = None
   if request.POST:
     form_data = forms.ContactForm(request.POST, request.FILES)
     if form_data.is_valid():
       form_data.save()
       messages.success(request, f'Successfully added { request.POST["name"] }!')
       return redirect('contact:index')
-  else:
-    form = forms.ContactForm()
-    ctx = {
+    else:
+      error = form_data.errors
+  form = forms.ContactForm()
+  ctx = {
       'pagetitle': 'Add Contact',
       'h1_data': 'Add Contact',
       'form': form,
-    }
-    return render(request, 'contact/add.html', ctx)
+      'error': error,
+  }
+  return render(request, 'contact/add.html', ctx)
       
 @login_required(login_url=settings.LOGIN_URL)
 def edit(request, contact_id):
+  error = None
   if request.POST:
     contact = models.Contact.objects.get(id=contact_id)
     form_data = forms.ContactForm(request.POST, request.FILES, instance=contact)
@@ -47,16 +51,18 @@ def edit(request, contact_id):
       form_data.save()
       messages.success(request, f'Successfully edited { request.POST["name"] }!')
       return redirect('contact:index')
-  else:
-    contact = models.Contact.objects.get(id=contact_id)
-    form = forms.ContactForm(instance=contact)
-    ctx = {
+    else:
+      error = form_data.errors
+  contact = models.Contact.objects.get(id=contact_id)
+  form = forms.ContactForm(instance=contact)
+  ctx = {
       'pagetitle': f'Edit { contact.name }',
       'h1_data': f'Edit { contact.name }',
       'contact': contact,
       'form': form,
-    }
-    return render(request, 'contact/edit.html', ctx)
+      'error': error,
+  }
+  return render(request, 'contact/edit.html', ctx)
 
 @login_required(login_url=settings.LOGIN_URL)
 def delete(request, contact_id):
