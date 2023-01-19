@@ -14,7 +14,7 @@ def index(request):
 
 def add(request):
   if request.POST:
-    form_data = forms.ContactForm(request.POST)
+    form_data = forms.ContactForm(request.POST, request.FILES)
     if form_data.is_valid():
       form_data.save()
       return redirect('contact:index')
@@ -29,7 +29,7 @@ def add(request):
 def edit(request, contact_id):
   if request.POST:
     contact = models.Contact.objects.get(id=contact_id)
-    form_data = forms.ContactForm(request.POST, instance=contact)
+    form_data = forms.ContactForm(request.POST, request.FILES, instance=contact)
     if form_data.is_valid():
       form_data.save()
       return redirect('contact:index')
