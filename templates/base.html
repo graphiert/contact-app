@@ -13,12 +13,21 @@
   
   {% if user.is_authenticated %}
   
-    <p class="text-end">
+    <p class="text-end mt-2 me-3">
       Hi, <b>{{ user }}</b> | <a href="{% url 'signup' %}">Sign Up</a> | <a href="{% url 'logout' %}">Logout</a>
     </p>
   
   {% endif %}
-  
+    <h1 class="text-center">{{ h1_data }}</h1>
+    
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div class="alert alert-danger">ERROR: {{ message }}</div>
+      {% else %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+    
   {% block content %}{% endblock %}
 
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

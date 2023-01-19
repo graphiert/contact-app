@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="text-center">Login</h1>
   {% if user.is_authenticated %}
     <meta http-equiv="refresh" content="0; url={% url 'contact:index' %}">
   {% endif %}
+  
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4">
   <form action="" method="post">
     {% csrf_token %}
-    
-    {{ form.as_p }}
+    <table>
+      {{ form.as_table }}
+    </table>
     
     <button class="btn btn-primary" type="submit">Login</button>
   </form>
+  </div></div>
+<script>
+  document.title = 'Login';
+  document.querySelector('body > h1').innerHTML = 'Login';
+</script>
 {% endblock %}

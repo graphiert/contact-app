@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-  <h1 class="text-center">Edit contact for {{ contact.name }}</h1>
   
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4">
   <form action="" method="post"  enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    <table>
+    {{ form.as_table }}
+      
+    </table>
     <button ="submit" class="btn btn-primary">Submit</button>
-    <a href="{% url 'contact:index' %}">Back</a>
+    <a class="btn btn-secondary" href="{% url 'contact:index' %}">Back</a>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{ contact.id }}">Delete</button>
   </form>
+  </div></div>
 
 <div class="modal fade" id="delete-{{ contact.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
