@@ -8,5 +8,5 @@ def get_random_string(length):
 def pfp_handle(instance, filename):
   ext = filename.split('.')[-1]
   unique = get_random_string(8)
-  filename = f'{instance.id}_{unique}.{ext}'
+  filename = f'{unique}.{ext}'
   return os.path.join('pfp', filename)

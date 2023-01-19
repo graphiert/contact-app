@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from . import models, forms, resource
+from . import models, forms, resource, utils
 
 # Create your views here.
 
