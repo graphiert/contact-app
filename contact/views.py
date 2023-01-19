@@ -7,7 +7,11 @@ from . import models, forms
 
 @login_required(login_url=settings.LOGIN_URL)
 def index(request):
-  contacts = models.Contact.objects.all()
+  if request.POST:
+    keyword = request.POST['searchbox']
+    contacts = models.Contact.objects.filter(name__contains=keyword)
+  else:
+    contacts = models.Contact.objects.all()
   ctx = {
     'pagetitle': 'Home',
     'contacts': contacts,
