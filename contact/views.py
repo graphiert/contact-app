@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from . import models, forms
 
 # Create your views here.
 
+@login_required(login_url=settings.LOGIN_URL)
 def index(request):
   contacts = models.Contact.objects.all()
   ctx = {
@@ -12,6 +15,7 @@ def index(request):
   
   return render(request, 'contact/index.html', ctx)
 
+@login_required(login_url=settings.LOGIN_URL)
 def add(request):
   if request.POST:
     form_data = forms.ContactForm(request.POST, request.FILES)
@@ -26,6 +30,7 @@ def add(request):
     }
     return render(request, 'contact/add.html', ctx)
       
+@login_required(login_url=settings.LOGIN_URL)
 def edit(request, contact_id):
   if request.POST:
     contact = models.Contact.objects.get(id=contact_id)
@@ -43,6 +48,7 @@ def edit(request, contact_id):
     }
     return render(request, 'contact/edit.html', ctx)
 
+@login_required(login_url=settings.LOGIN_URL)
 def delete(request, contact_id):
   contact = models.Contact.objects.get(id=contact_id)
   contact.delete()

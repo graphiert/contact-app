@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
 </head>
 <body>
+  
+  {% if user.is_authenticated %}
+  
+    <p class="text-end">
+      Hi, <b>{{ user }}</b> | <a href="{% url 'logout' %}">Logout</a>
+    </p>
+  
+  {% endif %}
+  
   {% block content %}{% endblock %}
 
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
