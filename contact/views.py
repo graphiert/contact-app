@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from . import models, forms
+from . import models, forms, resource
 
 # Create your views here.
 
@@ -59,3 +59,11 @@ def delete(request, contact_id):
   
   return redirect('contact:index')
     
+
+@login_required(login_url=settings.LOGIN_URL)
+def export(request):
+  contacts = resource.ContactResource()
+  dataset = contacts.export()
+  response = HttpResponse(dataset.xlsx, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  response['Content-Disposition'] = 'attachment; filename=mycontact.xlsx'
+  return response
