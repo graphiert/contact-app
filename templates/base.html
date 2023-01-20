@@ -28,6 +28,12 @@
       {% endif %}
     {% endfor %}
     
+    {% if error %}
+
+      <div>{{ error }}</div>
+
+    {% endif %}
+    
   {% block content %}{% endblock %}
 
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
