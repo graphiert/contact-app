@@ -23,7 +23,7 @@ from . import views
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page=settings.LOGIN_URL), name='logout'),
     path('signup/', views.signup, name='signup'),
