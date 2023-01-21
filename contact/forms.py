@@ -13,3 +13,5 @@ class ContactForm(forms.ModelForm):
     data = models.Contact.objects.filter(name__iexact=name_value).exists()
     if data == True:
       raise ValidationError(f'{name} is already exists.')
+    else:
+      return name
