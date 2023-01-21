@@ -12,9 +12,12 @@ class SignUpForm(UserCreationForm):
     data = User.objects.filter(email__iexact=email_value).exists()
     if data == True:
       raise ValidationError('A user with that email already exists.')
+    else:
+      return email_value
   
   def save(self):
     user = super(UserCreationForm, self).save()
     user.email = self.cleaned_data.get('email')
+    user.set_password(self.cleaned_data.get('password1'))
     user.save()
     return user
