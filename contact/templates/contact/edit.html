@@ -3,7 +3,7 @@
 {% block content %}
   
   <div class="row d-flex justify-content-center">
-    <div class="col-md-4">
+    <div class="col-md-6">
       
   <form action="" method="post"  enctype="multipart/form-data">
     {% csrf_token %}
@@ -12,8 +12,8 @@
       
     </table>
     <button ="submit" class="btn btn-primary">Submit</button>
-    <a class="btn btn-secondary" href="{% url 'contact:index' %}">Back</a>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{ contact.id }}">Delete</button>
+    <a class="btn btn-secondary" href="{% url 'contact:index' %}">Back</a>
   </form>
   </div></div>
 
