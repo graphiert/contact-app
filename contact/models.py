@@ -6,6 +6,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=50)
     phone_number = models.IntegerField()
     email = models.EmailField(blank=True)
+    gender = models.CharField(max_length=6)
     profile_picture = models.ImageField(upload_to=utils.pfp_handle, blank=True)
     
     def save(self, *args, **kwargs):

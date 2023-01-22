@@ -3,6 +3,12 @@ from django.core.exceptions import ValidationError
 from . import models
 
 class ContactForm(forms.ModelForm):
+  GENDER_CHOICES = (
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('askme', 'Ask Me'),
+  )
+  gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.RadioSelect())
   class Meta:
     model = models.Contact
     fields = '__all__'
