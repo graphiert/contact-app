@@ -1,4 +1,4 @@
-"""iniproject URL Configuration
+u"""iniproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -23,7 +23,7 @@ from . import views
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page=settings.LOGIN_URL), name='logout'),
     path('signup/', views.signup, name='signup'),
