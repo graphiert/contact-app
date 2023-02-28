@@ -16,8 +16,13 @@ class ContactForm(forms.ModelForm):
   def clean_name(self):
     name = self.cleaned_data.get('name')
     name_value = name.lower()
-    data = models.Contact.objects.filter(name__iexact=name_value).exists()
-    if data == True:
+    data = models.Contact.objects.filter(name__iexact=name_value)
+    if self.instance:
+      data = data.exclude(pk=self.instance.pk)
+    else:
+      data = data
+    if data.exists() == True:
       raise ValidationError(f'{name} is already exists.')
     else:
       return name
+
