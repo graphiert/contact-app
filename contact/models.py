@@ -3,6 +3,7 @@ from . import utils
 
 # Create your models here.
 class Contact(models.Model):
+    # Create field
     name = models.CharField(max_length=50)
     phone_number = models.IntegerField()
     email = models.EmailField(blank=True)
@@ -10,8 +11,10 @@ class Contact(models.Model):
     profile_picture = models.ImageField(upload_to=utils.pfp_handle, blank=True)
     
     def save(self, *args, **kwargs):
+      # Check data from id
       try:
         this = Contact.objects.get(id=self.id)
+        # If the image data not same with the image, delete image (pfp changed)
         if this.profile_picture != self.profile_picture:
           this.profile_picture.delete(save=False)
       except:
