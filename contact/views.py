@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -8,16 +9,24 @@ from . import models, forms, resource, utils
 
 @login_required(login_url=settings.LOGIN_URL)
 def index(request):
-  if request.POST:
-    keyword = request.POST['searchbox']
+  if request.GET.get('search'):
+    keyword = request.GET['search']
     contacts = models.Contact.objects.filter(name__contains=keyword)
+    ctx = {
+      'pagetitle': 'Home',
+      'h1_data': 'Contact List',
+      'contacts': contacts,
+    }
   else:
     contacts = models.Contact.objects.all()
-  ctx = {
-    'pagetitle': 'Home',
-    'h1_data': 'Contact List',
-    'contacts': contacts,
-  }
+    page = request.GET.get("page", 1)
+    contacts = Paginator(contacts, 5).get_page(page)
+    ctx = {
+      'pagetitle': 'Home',
+      'h1_data': 'Contact List',
+      'contacts': contacts,
+      'page': contacts,
+    }
   
   return render(request, 'contact/index.html', ctx)
 

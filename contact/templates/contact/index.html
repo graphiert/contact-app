@@ -10,16 +10,18 @@
         <a href="{% url 'contact:add' %}" class="btn btn-primary">Add Contact</a>
         <a href="{% url 'contact:export_xlsx' %}" class="btn btn-success">Export as .xlsx</a>
       </div>
-    
-      <form action="" class="mt-3 mb-3 input-group justify-content-center" method="post">
-        {% csrf_token %}
-        <input type="search" name="searchbox">
+
+      <form action="" method="get" class="mt-3 mb-3 input-group justify-content-center" method="post">
+        <input type="text" name="search">
         <button class="btn btn-secondary" type="submit">Search</button>
       </form>
     </div>
   </div>
   
   <div class="container">
+    {% if "?search" in request.get_full_path %}
+      <a href="{% url 'contact:index' %}">&laquo;Go back</a>
+    {% endif %}
   <table class="table">
     <thead>
       <tr>
@@ -43,5 +45,53 @@
     </tbody>
   </table>
   </div>
-  
+
+<div class="container d-flex justify-content-center">
+{% if page %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if page.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{page.previous_page_number}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% for numpage in page.paginator.page_range %}
+      {% if numpage == page.number %}
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">{{ numpage }}</a>
+        </li>
+      {% else %}
+        <li class="page-item" aria-current="page">
+          <a class="page-link" href="?page={{numpage}}">{{ numpage }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{page.next_page_number}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+</div>
+
 {% endblock %}
