@@ -12,21 +12,17 @@ def index(request):
   if request.GET.get('search'):
     keyword = request.GET['search']
     contacts = models.Contact.objects.filter(name__contains=keyword)
-    ctx = {
-      'pagetitle': 'Home',
-      'h1_data': 'Contact List',
-      'contacts': contacts,
-    }
   else:
     contacts = models.Contact.objects.all()
-    page = request.GET.get("page", 1)
-    contacts = Paginator(contacts, 5).get_page(page)
-    ctx = {
-      'pagetitle': 'Home',
-      'h1_data': 'Contact List',
-      'contacts': contacts,
-      'page': contacts,
-    }
+  page = request.GET.get("page", 1)
+  contacts = Paginator(contacts, 5).get_page(page)
+  ctx = {
+    'pagetitle': 'Home',
+    'h1_data': 'Contact List',
+    'contacts': contacts,
+    'page': contacts,
+    'search': request.GET.get('search', ''),
+  }
   
   return render(request, 'contact/index.html', ctx)
 

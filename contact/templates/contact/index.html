@@ -52,7 +52,7 @@
   <ul class="pagination">
     {% if page.has_previous %}
     <li class="page-item">
-      <a class="page-link" href="?page={{page.previous_page_number}}" aria-label="Previous">
+      <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{page.previous_page_number}}" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
@@ -71,14 +71,14 @@
         </li>
       {% else %}
         <li class="page-item" aria-current="page">
-          <a class="page-link" href="?page={{numpage}}">{{ numpage }}</a>
+          <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{numpage}}">{{ numpage }}</a>
         </li>
       {% endif %}
     {% endfor %}
 
     {% if page.has_next %}
     <li class="page-item">
-      <a class="page-link" href="?page={{page.next_page_number}}" aria-label="Next">
+      <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{page.next_page_number}}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
