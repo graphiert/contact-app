@@ -20,7 +20,6 @@ def index(request):
     'pagetitle': 'Home',
     'h1_data': 'Contact List',
     'contacts': contacts,
-    'page': contacts,
     'search': request.GET.get('search', ''),
   }
   

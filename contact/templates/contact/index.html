@@ -47,12 +47,11 @@
   </div>
 
 <div class="container d-flex justify-content-center">
-{% if page %}
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    {% if page.has_previous %}
+    {% if contacts.has_previous %}
     <li class="page-item">
-      <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{page.previous_page_number}}" aria-label="Previous">
+      <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{contacts.previous_page_number}}" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
@@ -64,8 +63,8 @@
     </li>
     {% endif %}
 
-    {% for numpage in page.paginator.page_range %}
-      {% if numpage == page.number %}
+    {% for numpage in contacts.paginator.page_range %}
+      {% if numpage == contacts.number %}
         <li class="page-item active" aria-current="page">
           <a class="page-link" href="#">{{ numpage }}</a>
         </li>
@@ -76,9 +75,9 @@
       {% endif %}
     {% endfor %}
 
-    {% if page.has_next %}
+    {% if contacts.has_next %}
     <li class="page-item">
-      <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{page.next_page_number}}" aria-label="Next">
+      <a class="page-link" href="{% if search %}?search={{search}}&{% else %}?{% endif %}page={{contacts.next_page_number}}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
@@ -91,7 +90,6 @@
     {% endif %}
   </ul>
 </nav>
-{% endif %}
 </div>
 
 {% endblock %}
