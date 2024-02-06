@@ -13,7 +13,7 @@
     </table>
     <button ="submit" class="btn btn-primary">Submit</button>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{ contact.id }}">Delete</button>
-    <a class="btn btn-secondary" href="{% url 'contact:index' %}">Back</a>
+    <a class="btn btn-secondary" href="{{request.META.HTTP_REFERER}}">Back</a>
   </form>
   </div></div>
 
