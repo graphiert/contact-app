@@ -71,8 +71,8 @@ def edit(request, contact_id):
 @login_required(login_url=settings.LOGIN_URL)
 def delete(request, contact_id):
   contact = models.Contact.objects.get(id=contact_id)
-  contact.profile_picture.delete()
-  contact.delete()
+  # contact.profile_picture.delete()
+  contact.delete() # will automatically delete with the photo
   
   return redirect('contact:index')
     
