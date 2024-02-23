@@ -17,7 +17,18 @@ class ContactForm(forms.ModelForm):
   class Meta:
     model = models.Contact
     fields = '__all__'
-   
+  
+  # Check if inserted is numbers
+  def clean_phone_number(self):
+    # Get phone number
+    try:
+      phone_number = self.cleaned_data.get('phone_number')
+      int(phone_number)
+      return phone_number
+    # Return error if not numbers
+    except ValueError:
+      raise ValidationError('Can only contain numbers.')
+  
   # Check if there is a same name
   def clean_name(self):
     # Get name

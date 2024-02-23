@@ -5,7 +5,7 @@ from . import utils
 class Contact(models.Model):
     # Create field
     name = models.CharField(max_length=50)
-    phone_number = models.BigIntegerField()
+    phone_number = models.CharField(max_length=20)
     email = models.EmailField(blank=True)
     gender = models.CharField(max_length=6)
     profile_picture = models.ImageField(upload_to=utils.pfp_handle, blank=True)
