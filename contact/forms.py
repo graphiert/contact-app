@@ -30,20 +30,20 @@ class ContactForm(forms.ModelForm):
       raise ValidationError('Can only contain numbers.')
   
   # Check if there is a same name
-  def clean_name(self):
-    # Get name
-    name = self.cleaned_data.get('name')
-    name_value = name.lower()
-    # Check name that same from form that inputed by user
-    data = models.Contact.objects.filter(name__iexact=name_value)
-    # If data edited, let name same (exclude the name so there isn't have any data)
-    if self.instance:
-      data = data.exclude(pk=self.instance.pk)
-    else:
-      data = data
-    # If data exist, show an error, else continue the logic
-    if data.exists() == True:
-      raise ValidationError(f'{name} is already exists.')
-    else:
-      return name
+  # def clean_name(self):
+  #   # Get name
+  #   name = self.cleaned_data.get('name')
+  #   name_value = name.lower()
+  #   # Check name that same from form that inputed by user
+  #   data = models.Contact.objects.filter(name__iexact=name_value)
+  #   # If data edited, let name same (exclude the name so there isn't have any data)
+  #   if self.instance:
+  #     data = data.exclude(pk=self.instance.pk)
+  #   else:
+  #     data = data
+  #   # If data exist, show an error, else continue the logic
+  #   if data.exists() == True:
+  #     raise ValidationError(f'{name} is already exists.')
+  #   else:
+  #     return name
 

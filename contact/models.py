@@ -4,7 +4,7 @@ from . import utils
 # Create your models here.
 class Contact(models.Model):
     # Create field
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField(blank=True)
     gender = models.CharField(max_length=6)
